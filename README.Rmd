@@ -1,0 +1,356 @@
+---
+title: "原住民"
+output: github_document
+---
+
+
+
+##組員
+
+邱春敏 許晏慈
+
+## 分析議題背景
+台灣居住著各種族群，其中原住民族約有55萬人，佔總人口數的2﹪，目前，經政府認定的原住民族有：阿美族、泰雅族、排灣族、布農族、卑南族、魯凱族、鄒族、賽夏族、雅美族、邵族、噶瑪蘭族、太魯閣族、撒奇萊雅族、賽德克族、拉阿魯哇族、卡那卡那富族等16族，每一族群居住位置分佈、人數、教育程度與婚姻狀況也有所不同。
+
+## 分析動機
+原住民在台灣雖為較少數族群，但其人口數、教育程度、婚姻狀況的發展以及居住分布也是值得探討的議題，藉此也可觀察出關於原住民人口的動態。
+
+## 使用資料
+1.現住原住民人口按性別、身分、原住民族別分 來源:政府資料開放平台 主要欄位:統計年月、區域別、村里、性別、身分、原住民族別 日期：105年09月
+
+2.現住人口數按性別及原住民身分分 來源:政府資料開放平台 主要欄位:統計年月、區域別、村里、非原住民、平地原住民、山地原住民、性別
+日期：105年09月
+
+3.原住民人口按性別、年齡、原住民身分及婚姻狀況 來源:政府資料開放平台 主要欄位:統計年、區域別、村里、原住民身分、5歲年齡組、婚姻狀況、男性、女性 日期：105年
+
+4.15歲以上現住原住民人口數按性別、原住民身分及教育程度分 來源:政府資料開放平台 主要欄位:統計年、區域別、村里、總計、教育程度、平地原住民、山地原住民 日期：105年
+
+載入使用資料們
+```{r}
+#這是R Code Chunk
+library(readr)
+opendata10509M070 <- read_csv("C:/Users/k451ln/Downloads/opendata10509M070.csv")
+opendata10509M070 <- opendata10509M070[c(-1),]
+View(opendata10509M070) #現住原住民人口按性別、身分、原住民族別分
+
+library(readr)
+opendata10509M020 <- read_csv("C:/Users/k451ln/Downloads/opendata10509M020.csv")
+View(opendata10509M020) #現住人口數按性別及原住民身分分
+
+library(readr)
+opendata105Y090 <- read_csv("C:/Users/k451ln/Downloads/opendata105Y090.csv")
+View(opendata105Y090) #原住民人口按性別、年齡、原住民身分及婚姻狀況
+
+library(readr)
+opendata105Y080 <- read_csv("C:/Users/k451ln/Downloads/opendata105Y080.csv")
+View(opendata105Y080) #15歲以上現住原住民人口數按性別、原住民身分及教育程度分
+
+```
+
+## 資料處理與清洗
+說明處理資料的步驟
+
+處理資料
+```{r}
+#這是R Code Chunk
+opendata10509M070$aborigine_amis_m <- as.numeric(opendata10509M070$aborigine_amis_m)#
+opendata10509M070$aborigine_amis_f <- as.numeric(opendata10509M070$aborigine_amis_f)#
+opendata10509M070$aborigine_atayal_m<-
+  as.numeric(opendata10509M070$aborigine_atayal_m)#
+opendata10509M070$aborigine_atayal_f<-
+  as.numeric(opendata10509M070$aborigine_atayal_f)#
+opendata10509M070$aborigine_paiwan_m<-
+  as.numeric(opendata10509M070$aborigine_paiwan_m)#
+opendata10509M070$aborigine_paiwan_f<-
+  as.numeric(opendata10509M070$aborigine_paiwan_f)#
+opendata10509M070$aborigine_bunun_m<-
+  as.numeric(opendata10509M070$aborigine_bunun_m)#
+opendata10509M070$aborigine_bunun_f<-
+  as.numeric(opendata10509M070$aborigine_bunun_f)#
+opendata10509M070$aborigine_rukai_m<-
+  as.numeric(opendata10509M070$aborigine_rukai_m)#
+opendata10509M070$aborigine_rukai_f<-
+  as.numeric(opendata10509M070$aborigine_rukai_f)#
+opendata10509M070$aborigine_puyuma_m<-
+  as.numeric(opendata10509M070$aborigine_puyuma_m)#
+opendata10509M070$aborigine_puyuma_f<-
+  as.numeric(opendata10509M070$aborigine_puyuma_f)#
+opendata10509M070$aborigine_tsou_m<-
+  as.numeric(opendata10509M070$aborigine_tsou_m)
+opendata10509M070$aborigine_tsou_f<-
+  as.numeric(opendata10509M070$aborigine_tsou_f)
+opendata10509M070$aborigine_saisiyat_m<-
+  as.numeric(opendata10509M070$aborigine_saisiyat_m)
+opendata10509M070$aborigine_saisiyat_f<-
+  as.numeric(opendata10509M070$aborigine_saisiyat_f)
+opendata10509M070$aborigine_yami_m<-
+  as.numeric(opendata10509M070$aborigine_yami_m)
+opendata10509M070$aborigine_yami_f<-
+  as.numeric(opendata10509M070$aborigine_yami_f)
+opendata10509M070$aborigine_thao_m<-
+  as.numeric(opendata10509M070$aborigine_thao_m)
+opendata10509M070$aborigine_thao_f<-
+  as.numeric(opendata10509M070$aborigine_thao_f)
+opendata10509M070$aborigine_kavalan_m<-
+  as.numeric(opendata10509M070$aborigine_kavalan_m)
+opendata10509M070$aborigine_kavalan_f<-
+  as.numeric(opendata10509M070$aborigine_kavalan_f)
+opendata10509M070$aborigine_truku_m<-
+  as.numeric(opendata10509M070$aborigine_truku_m)
+opendata10509M070$aborigine_truku_f<-
+  as.numeric(opendata10509M070$aborigine_truku_f)
+opendata10509M070$aborigine_sakizaya_m<-
+  as.numeric(opendata10509M070$aborigine_sakizaya_m)
+opendata10509M070$aborigine_sakizaya_f<-
+  as.numeric(opendata10509M070$aborigine_sakizaya_f)
+opendata10509M070$aborigine_sediq_m<-
+  as.numeric(opendata10509M070$aborigine_sediq_m)
+opendata10509M070$aborigine_sediq_f<-
+  as.numeric(opendata10509M070$aborigine_sediq_f)
+opendata10509M070$aborigine_hlaaluaavu_m<-
+  as.numeric(opendata10509M070$aborigine_hlaaluaavu_m)
+opendata10509M070$aborigine_hlaaluaavu_f<-
+  as.numeric(opendata10509M070$aborigine_hlaaluaavu_f)
+opendata10509M070$aborigine_kanakanavu_m<-
+  as.numeric(opendata10509M070$aborigine_kanakanavu_m)
+opendata10509M070$aborigine_kanakanavu_f<-
+  as.numeric(opendata10509M070$aborigine_kanakanavu_f)
+
+library(dplyr)
+aborigine<-group_by(opendata10509M070,site_id)%>%
+  summarise(
+          aborigine_amis=sum(aborigine_amis_m,aborigine_amis_f),#阿美
+          aborigine_atayal=sum(aborigine_atayal_m,aborigine_atayal_f),#泰雅
+          aborigine_paiwan=sum(aborigine_paiwan_m,aborigine_paiwan_f),#排灣
+          aborigine_bunun=sum(aborigine_bunun_m,aborigine_bunun_f),#布農
+          aborigine_rukai=sum(aborigine_rukai_m,aborigine_rukai_f),#魯凱
+          aborigine_puyuma=sum(aborigine_puyuma_m,aborigine_puyuma_f),#卑南
+          aborigine_tsou=sum(aborigine_tsou_m,aborigine_tsou_f),#鄒族
+          aborigine_saisiyat=sum(aborigine_saisiyat_m,aborigine_saisiyat_f),#賽夏族
+          aborigine_yami=sum(aborigine_yami_m,aborigine_yami_f),#雅美族
+          aborigine_thao=sum(aborigine_thao_m,aborigine_thao_f),#邵族
+          aborigine_kavalan=sum(aborigine_kavalan_m,aborigine_kavalan_f),#噶瑪蘭族
+          aborigine_truku=sum(aborigine_truku_m,aborigine_truku_f),#太魯閣族
+          aborigine_sakizaya=sum(aborigine_sakizaya_m,aborigine_sakizaya_f),#撒奇萊雅族
+          aborigine_sediq=sum(aborigine_sediq_m,aborigine_sediq_f),#賽德克族
+          aborigine_hlaaluaavu=sum(aborigine_hlaaluaavu_m,aborigine_hlaaluaavu_f),#拉阿魯哇族
+          aborigine_kanakanavu=sum(aborigine_kanakanavu_m,aborigine_kanakanavu_f)#卡那卡那富族
+          
+          )
+View(aborigine)##原住民
+
+
+
+opendata10509M070$aborigine_plain_amis_m <- as.numeric(opendata10509M070$aborigine_plain_amis_m)#
+opendata10509M070$aborigine_plain_amis_f <- as.numeric(opendata10509M070$aborigine_plain_amis_f)#
+opendata10509M070$aborigine_plain_atayal_m<-
+  as.numeric(opendata10509M070$aborigine_plain_atayal_m)#
+opendata10509M070$aborigine_plain_atayal_f<-
+  as.numeric(opendata10509M070$aborigine_plain_atayal_f)#
+opendata10509M070$aborigine_plain_paiwan_m<-
+  as.numeric(opendata10509M070$aborigine_plain_paiwan_m)#
+opendata10509M070$aborigine_plain_paiwan_f<-
+  as.numeric(opendata10509M070$aborigine_plain_paiwan_f)#
+opendata10509M070$aborigine_plain_bunun_m<-
+  as.numeric(opendata10509M070$aborigine_plain_bunun_m)#
+opendata10509M070$aborigine_plain_bunun_f<-
+  as.numeric(opendata10509M070$aborigine_plain_bunun_f)#
+opendata10509M070$aborigine_plain_rukai_m<-
+  as.numeric(opendata10509M070$aborigine_plain_rukai_m)#
+opendata10509M070$aborigine_plain_rukai_f<-
+  as.numeric(opendata10509M070$aborigine_plain_rukai_f)#
+opendata10509M070$aborigine_plain_puyuma_m<-
+  as.numeric(opendata10509M070$aborigine_plain_puyuma_m)#
+opendata10509M070$aborigine_plain_puyuma_f<-
+  as.numeric(opendata10509M070$aborigine_plain_puyuma_f)#
+opendata10509M070$aborigine_plain_tsou_m<-
+  as.numeric(opendata10509M070$aborigine_plain_tsou_m)
+opendata10509M070$aborigine_plain_tsou_f<-
+  as.numeric(opendata10509M070$aborigine_plain_tsou_f)
+opendata10509M070$aborigine_plain_saisiyat_m<-
+  as.numeric(opendata10509M070$aborigine_plain_saisiyat_m)
+opendata10509M070$aborigine_plain_saisiyat_f<-
+  as.numeric(opendata10509M070$aborigine_plain_saisiyat_f)
+opendata10509M070$aborigine_plain_yami_m<-
+  as.numeric(opendata10509M070$aborigine_plain_yami_m)
+opendata10509M070$aborigine_plain_yami_f<-
+  as.numeric(opendata10509M070$aborigine_plain_yami_f)
+opendata10509M070$aborigine_plain_thao_m<-
+  as.numeric(opendata10509M070$aborigine_plain_thao_m)
+opendata10509M070$aborigine_plain_thao_f<-
+  as.numeric(opendata10509M070$aborigine_plain_thao_f)
+opendata10509M070$aborigine_plain_kavalan_m<-
+  as.numeric(opendata10509M070$aborigine_plain_kavalan_m)
+opendata10509M070$aborigine_plain_kavalan_f<-
+  as.numeric(opendata10509M070$aborigine_plain_kavalan_f)
+opendata10509M070$aborigine_plain_truku_m<-
+  as.numeric(opendata10509M070$aborigine_plain_truku_m)
+opendata10509M070$aborigine_plain_truku_f<-
+  as.numeric(opendata10509M070$aborigine_plain_truku_f)
+opendata10509M070$aborigine_plain_sakizaya_m<-
+  as.numeric(opendata10509M070$aborigine_plain_sakizaya_m)
+opendata10509M070$aborigine_plain_sakizaya_f<-
+  as.numeric(opendata10509M070$aborigine_plain_sakizaya_f)
+opendata10509M070$aborigine_plain_sediq_m<-
+  as.numeric(opendata10509M070$aborigine_plain_sediq_m)
+opendata10509M070$aborigine_plain_sediq_f<-
+  as.numeric(opendata10509M070$aborigine_plain_sediq_f)
+opendata10509M070$aborigine_plain_hlaaluaavu_m<-
+  as.numeric(opendata10509M070$aborigine_plain_hlaaluaavu_m)
+opendata10509M070$aborigine_plain_hlaaluaavu_f<-
+  as.numeric(opendata10509M070$aborigine_plain_hlaaluaavu_f)
+opendata10509M070$aborigine_plain_kanakanavu_m<-
+  as.numeric(opendata10509M070$aborigine_plain_kanakanavu_m)
+opendata10509M070$aborigine_plain_kanakanavu_f<-
+  as.numeric(opendata10509M070$aborigine_plain_kanakanavu_f)
+
+library(dplyr)
+aborigine_plain<-group_by(opendata10509M070,site_id)%>%
+  summarise(
+          aborigine_plain_amis=sum(aborigine_plain_amis_m,aborigine_plain_amis_f),#阿美
+          aborigine_plain_atayal=sum(aborigine_plain_atayal_m,aborigine_plain_atayal_f),#泰雅
+          aborigine_plain_paiwan=sum(aborigine_plain_paiwan_m,aborigine_plain_paiwan_f),#排灣
+          aborigine_plain_bunun=sum(aborigine_plain_bunun_m,aborigine_plain_bunun_f),#布農
+          aborigine_plain_rukai=sum(aborigine_plain_rukai_m,aborigine_plain_rukai_f),#魯凱
+          aborigine_plain_puyuma=sum(aborigine_plain_puyuma_m,aborigine_plain_puyuma_f),#卑南
+          aborigine_plain_tsou=sum(aborigine_plain_tsou_m,aborigine_plain_tsou_f),#鄒族
+          aborigine_plain_saisiyat=sum(aborigine_plain_saisiyat_m,aborigine_plain_saisiyat_f),#賽夏族
+          aborigine_plain_yami=sum(aborigine_plain_yami_m,aborigine_plain_yami_f),#雅美族
+          aborigine_plain_thao=sum(aborigine_plain_thao_m,aborigine_plain_thao_f),#邵族
+          aborigine_plain_kavalan=sum(aborigine_plain_kavalan_m,aborigine_plain_kavalan_f),#噶瑪蘭族
+          aborigine_plain_truku=sum(aborigine_plain_truku_m,aborigine_plain_truku_f),#太魯閣族
+          aborigine_plain_sakizaya=sum(aborigine_plain_sakizaya_m,aborigine_plain_sakizaya_f),#撒奇萊雅族
+          aborigine_plain_sediq=sum(aborigine_plain_sediq_m,aborigine_plain_sediq_f),#賽德克族
+          aborigine_plain_hlaaluaavu=sum(aborigine_plain_hlaaluaavu_m,aborigine_plain_hlaaluaavu_f),#拉阿魯哇族
+          aborigine_plain_kanakanavu=sum(aborigine_plain_kanakanavu_m,aborigine_plain_kanakanavu_f)#卡那卡那富族
+          
+          )
+View(aborigine_plain)##平地原住民
+
+opendata10509M070$aborigine_mountain_amis_m <- as.numeric(opendata10509M070$aborigine_mountain_amis_m)#
+opendata10509M070$aborigine_mountain_amis_f <- as.numeric(opendata10509M070$aborigine_mountain_amis_f)#
+opendata10509M070$aborigine_mountain_atayal_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_atayal_m)#
+opendata10509M070$aborigine_mountain_atayal_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_atayal_f)#
+opendata10509M070$aborigine_mountain_paiwan_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_paiwan_m)#
+opendata10509M070$aborigine_mountain_paiwan_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_paiwan_f)#
+opendata10509M070$aborigine_mountain_bunun_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_bunun_m)#
+opendata10509M070$aborigine_mountain_bunun_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_bunun_f)#
+opendata10509M070$aborigine_mountain_rukai_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_rukai_m)#
+opendata10509M070$aborigine_mountain_rukai_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_rukai_f)#
+opendata10509M070$aborigine_mountain_puyuma_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_puyuma_m)#
+opendata10509M070$aborigine_mountain_puyuma_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_puyuma_f)#
+opendata10509M070$aborigine_mountain_tsou_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_tsou_m)
+opendata10509M070$aborigine_mountain_tsou_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_tsou_f)
+opendata10509M070$aborigine_mountain_saisiyat_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_saisiyat_m)
+opendata10509M070$aborigine_mountain_saisiyat_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_saisiyat_f)
+opendata10509M070$aborigine_mountain_yami_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_yami_m)
+opendata10509M070$aborigine_mountain_yami_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_yami_f)
+opendata10509M070$aborigine_mountain_thao_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_thao_m)
+opendata10509M070$aborigine_mountain_thao_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_thao_f)
+opendata10509M070$aborigine_mountain_kavalan_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_kavalan_m)
+opendata10509M070$aborigine_mountain_kavalan_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_kavalan_f)
+opendata10509M070$aborigine_mountain_truku_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_truku_m)
+opendata10509M070$aborigine_mountain_truku_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_truku_f)
+opendata10509M070$aborigine_mountain_sakizaya_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_sakizaya_m)
+opendata10509M070$aborigine_mountain_sakizaya_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_sakizaya_f)
+opendata10509M070$aborigine_mountain_sediq_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_sediq_m)
+opendata10509M070$aborigine_mountain_sediq_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_sediq_f)
+opendata10509M070$aborigine_mountain_hlaaluaavu_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_hlaaluaavu_m)
+opendata10509M070$aborigine_mountain_hlaaluaavu_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_hlaaluaavu_f)
+opendata10509M070$aborigine_mountain_kanakanavu_m<-
+  as.numeric(opendata10509M070$aborigine_mountain_kanakanavu_m)
+opendata10509M070$aborigine_mountain_kanakanavu_f<-
+  as.numeric(opendata10509M070$aborigine_mountain_kanakanavu_f)
+
+library(dplyr)
+aborigine_mountain<-group_by(opendata10509M070,site_id)%>%
+  summarise(
+          aborigine_mountain_amis=sum(aborigine_mountain_amis_m,aborigine_mountain_amis_f),#阿美
+          aborigine_mountain_atayal=sum(aborigine_mountain_atayal_m,aborigine_mountain_atayal_f),#泰雅
+          aborigine_mountain_paiwan=sum(aborigine_mountain_paiwan_m,aborigine_mountain_paiwan_f),#排灣
+          aborigine_mountain_bunun=sum(aborigine_mountain_bunun_m,aborigine_mountain_bunun_f),#布農
+          aborigine_mountain_rukai=sum(aborigine_mountain_rukai_m,aborigine_mountain_rukai_f),#魯凱
+          aborigine_mountain_puyuma=sum(aborigine_mountain_puyuma_m,aborigine_mountain_puyuma_f),#卑南
+          aborigine_mountain_tsou=sum(aborigine_mountain_tsou_m,aborigine_mountain_tsou_f),#鄒族
+          aborigine_mountain_saisiyat=sum(aborigine_mountain_saisiyat_m,aborigine_mountain_saisiyat_f),#賽夏族
+          aborigine_mountain_yami=sum(aborigine_mountain_yami_m,aborigine_mountain_yami_f),#雅美族
+          aborigine_mountain_thao=sum(aborigine_mountain_thao_m,aborigine_mountain_thao_f),#邵族
+          aborigine_mountain_kavalan=sum(aborigine_mountain_kavalan_m,aborigine_mountain_kavalan_f),#噶瑪蘭族
+          aborigine_mountain_truku=sum(aborigine_mountain_truku_m,aborigine_mountain_truku_f),#太魯閣族
+          aborigine_mountain_sakizaya=sum(aborigine_mountain_sakizaya_m,aborigine_mountain_sakizaya_f),#撒奇萊雅族
+          aborigine_mountain_sediq=sum(aborigine_mountain_sediq_m,aborigine_mountain_sediq_f),#賽德克族
+          aborigine_mountain_hlaaluaavu=sum(aborigine_mountain_hlaaluaavu_m,aborigine_mountain_hlaaluaavu_f),#拉阿魯哇族
+          aborigine_mountain_kanakanavu=sum(aborigine_mountain_kanakanavu_m,aborigine_mountain_kanakanavu_f)#卡那卡那富族
+          
+          )
+View(aborigine_mountain)##山地原住民
+
+knitr::kable(aborigine)
+knitr::kable(aborigine_plain)
+knitr::kable(aborigine_mountain)
+
+
+
+
+
+
+```
+
+## 探索式資料分析
+原住民大學生畢業人數前六名縣市從下圖數據依序為臺東縣臺東市、花蓮縣吉安鄉、花蓮縣花蓮市、花蓮縣秀林鄉、南投縣仁愛鄉、桃園市中壢區，推測應該是花東地區原住民本身人口較多，所以原住民大學生畢業人數也較都市人口多
+```{r}
+
+opendata105Y080$aborigine_plain_edu_university_graduated_m<-as.numeric(opendata105Y080$aborigine_plain_edu_university_graduated_m)
+opendata105Y080$aborigine_plain_edu_university_graduated_f<-as.numeric(opendata105Y080$aborigine_plain_edu_university_graduated_f)
+opendata105Y080$aborigine_mountain_edu_university_graduated_m<-as.numeric(opendata105Y080$aborigine_mountain_edu_university_graduated_m)
+opendata105Y080$aborigine_mountain_edu_university_graduated_f<-as.numeric(opendata105Y080$aborigine_mountain_edu_university_graduated_f)
+
+library(ggplot2)
+library(datasets)
+library(dplyr)
+edu_university_graduated<-group_by(opendata105Y080,site_id)%>%
+  summarise(
+          edu_university_graduated_m=sum(aborigine_plain_edu_university_graduated_m,aborigine_mountain_edu_university_graduated_m),edu_university_graduated_f=sum(aborigine_plain_edu_university_graduated_f,aborigine_mountain_edu_university_graduated_f),edu_university_graduated=sum(edu_university_graduated_m+edu_university_graduated_f)) %>%
+  arrange(desc(edu_university_graduated))
+a<-head(edu_university_graduated)
+View(a)
+
+ggplot()+geom_bar(data=a,
+                  aes(x=site_id,y=edu_university_graduated),
+                  stat = "identity") 
+```
+
+## 期末專題分析規劃
+1.原住民各族佔原住民總人數比例
+2.原住民各族教育程度分布
+3.山地原住民與平地原住民人數比例差異
+4.原住民居住區域地分布於哪些位置
+5.原住民各年齡層婚姻狀況
