@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"README.Rmd\"\noutput: html_document\n---\n##組員\n\n邱春敏 許晏慈\n\n## 分析議題背景\n台灣居住著各種族群，其中原住民族約有55萬人，佔總人口數的2﹪，目前，經政府認定的原住民族有：阿美族、泰雅族、排灣族、布農族、卑南族、魯凱族、鄒族、賽夏族、雅美族、邵族、噶瑪蘭族、太魯閣族、撒奇萊雅族、賽德克族、拉阿魯哇族、卡那卡那富族等16族，每一族群居住位置分佈、人數、教育程度與婚姻狀況也有所不同。\n\n## 分析動機\n原住民在台灣雖為較少數族群，但其人口數、教育程度、婚姻狀況的發展以及居住分布也是值得探討的議題，藉此也可觀察出關於原住民人口的動態。\n\n## 使用資料\n1.現住原住民人口按性別、身分、原住民族別分 來源:政府資料開放平台 主要欄位:統計年月、區域別、村里、性別、身分、原住民族別 日期：105年09月\n\n2.現住人口數按性別及原住民身分分 來源:政府資料開放平台 主要欄位:統計年月、區域別、村里、非原住民、平地原住民、山地原住民、性別\n日期：105年09月\n\n3.原住民人口按性別、年齡、原住民身分及婚姻狀況 來源:政府資料開放平台 主要欄位:統計年、區域別、村里、原住民身分、5歲年齡組、婚姻狀況、男性、女性 日期：105年\n\n4.15歲以上現住原住民人口數按性別、原住民身分及教育程度分 來源:政府資料開放平台 主要欄位:統計年、區域別、村里、總計、教育程度、平地原住民、山地原住民 日期：105年\n\n載入使用資料們\n```{r setup, include=FALSE}\n#這是R Code Chunk\nlibrary(readr)\nopendata10509M070 <- read_csv(\"C:/Users/k451ln/Downloads/opendata10509M070.csv\")\nopendata10509M070 <- opendata10509M070[c(-1),]\nView(opendata10509M070) #現住原住民人口按性別、身分、原住民族別分\n\nlibrary(readr)\nopendata10509M020 <- read_csv(\"C:/Users/k451ln/Downloads/opendata10509M020.csv\")\nView(opendata10509M020) #現住人口數按性別及原住民身分分\n\nlibrary(readr)\nopendata105Y090 <- read_csv(\"C:/Users/k451ln/Downloads/opendata105Y090.csv\")\nView(opendata105Y090) #原住民人口按性別、年齡、原住民身分及婚姻狀況\n\nlibrary(readr)\nopendata105Y080 <- read_csv(\"C:/Users/k451ln/Downloads/opendata105Y080.csv\")\nView(opendata105Y080) #15歲以上現住原住民人口數按性別、原住民身分及教育程度分\n```\n\n## R Markdown\n\nThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.\n\nWhen you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:\n\n```{r cars}\nsummary(cars)\n```\n\n## Including Plots\n\nYou can also embed plots, for example:\n\n```{r pressure, echo=FALSE}\nplot(pressure)\n```\n\nNote that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.\n",
+    "created" : 1496745542631.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1854650150",
+    "id" : "FB6A4D99",
+    "lastKnownWriteTime" : 1496745663,
+    "last_content_update" : 1496745663874,
+    "path" : "C:/Users/k451ln/Desktop/judyniu/原住民/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
