@@ -1,0 +1,58 @@
+"0","#這是R Code Chunk"
+"0","library(readr)"
+"2","Warning message:
+"
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"
+"0","opendata10509M070 <- read_csv(""C:/Users/k451ln/Downloads/opendata10509M070.csv"")"
+"2","Parsed with column specification:
+cols(
+  .default = col_character()
+)
+"
+"2","See spec(...) for full column specifications.
+"
+"0","opendata10509M070 <- opendata10509M070[c(-1),]"
+"0","View(opendata10509M070) #現住原住民人口按性別、身分、原住民族別分"
+"0","library(readr)"
+"0","opendata10509M020 <- read_csv(""C:/Users/k451ln/Downloads/opendata10509M020.csv"")"
+"2","Parsed with column specification:
+cols(
+  statistic_yyymm = col_character(),
+  site_id = col_character(),
+  village = col_character(),
+  people_total = col_character(),
+  people_total_m = col_character(),
+  naborigine_total_m = col_character(),
+  aborigine_plain_total_m = col_character(),
+  aborigine_mountain_total_m = col_character(),
+  people_total_f = col_character(),
+  naborigine_total_f = col_character(),
+  aborigine_plain_total_f = col_character(),
+  aborigine_mountain_total_f = col_character()
+)
+"
+"0","View(opendata10509M020) #現住人口數按性別及原住民身分分"
+"0","library(readr)"
+"0","opendata105Y090 <- read_csv(""C:/Users/k451ln/Downloads/opendata105Y090.csv"")"
+"2","Parsed with column specification:
+cols(
+  .default = col_character()
+)
+"
+"2","See spec(...) for full column specifications.
+"
+"0","View(opendata105Y090) #原住民人口按性別、年齡、原住民身分及婚姻狀況"
+"0","library(readr)"
+"0","opendata105Y080 <- read_csv(""C:/Users/k451ln/Downloads/opendata105Y080.csv"")"
+"2","Parsed with column specification:
+cols(
+  .default = col_character()
+)
+"
+"2","See spec(...) for full column specifications.
+"
+"0","View(opendata105Y080) #15歲以上現住原住民人口數按性別、原住民身分及教育程度分"
